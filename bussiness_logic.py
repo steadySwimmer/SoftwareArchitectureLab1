@@ -1,60 +1,40 @@
-import datetime
+""" this is model"""
+
 import pickle
+import datetime
 
-AGE_KEY = 'age'
-FIRSTNAME_KEY = 'firstname'
+class User:
+    """ Describes all properties of library user"""
 
-BOOK_NAME_KEY = 'book_name'
-BOOK_AUTHOR_KEY = 'book_author'
-BOOK_YEAR_KEY = 'book_year'
+    def __init__(self, user_name, age):
+        self.user_name = user_name
+        self.age = age
+        self.__book_list = []
 
-list_of_users = {}
-list_of_books = []
+    @property
+    def user_name(self):
+        """ Return user name """
+        return self.__user_name
 
+    @property
+    def age(self):
+        """ Return user's age """
+        return self.__age
 
-def add_user(username, age, firstname):
-    pass
+    @age.setter
+    def age(self, age):
+        """ Set user's age """
+        if age > 0 and age < 100:
+            self.__age = age
+        else:
+            raise Exception("Age must be value between 1 and 99")
 
+    @user_name.setter
+    def user_name(self, user_name):
+        """ Set user name """
+        self.__user_name = user_name
 
-def remove_user(username):
-    pass
+    def take_book(self, book):
+        """ Function add book to user's book list """
+        self.__book_list.append(book)
 
-
-def add_book(book_name, book_author, book_year):
-    pass
-
-
-def remove_book(book_name):
-    pass
-
-
-def take_book(username):
-    pass
-
-
-def return_book(username):
-    pass
-
-
-def set_book_rate(book_name, rate):
-    pass
-
-
-def user_exist(username):
-    pass
-
-
-def book_exist(book_name):
-    pass
-
-
-def book_available(book_name):
-    pass
-
-
-def save_model(list_of_users, list_of_books):
-    pass
-
-
-def load_model():
-    pass
