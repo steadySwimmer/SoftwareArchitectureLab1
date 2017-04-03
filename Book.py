@@ -3,7 +3,7 @@ import functools
 class Book():
 	""" The class represents the enity of a real world book. """
 
-    def __init__(self, book_name, book_author, book_year = None):
+	def __init__(self, book_name, book_author, book_year=None):
     	""" Initializer of Book class 
     		Args:
     			book_name:(str): The name of the book
