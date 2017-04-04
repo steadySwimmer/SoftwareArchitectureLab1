@@ -4,14 +4,14 @@ class User:
     """ Describes all properties of library user.
 
     Attributes:
-        __book_list(lst): contains books took by particular user.
+        __book_list(lst): contains books are taken by a particular user.
     """
 
     def __init__(self, user_name, age):
         """ Initialize User class.
 
         Args:
-            user_name(str): user name; can be an arbitary sequence of charachters.
+            user_name(str): user name; can be an arbitrary sequence of characters.
             age(int): user's age; must be in (0..100).
         """
         self.user_name = user_name
@@ -25,7 +25,7 @@ class User:
 
     @property
     def age(self):
-        """ int: contains age of particular user, must be in range(1, 100) """
+        """ int: contains an age of  a particular user, must be in range(1, 100) """
         return self.__age
 
     @age.setter
@@ -43,7 +43,7 @@ class User:
         """ Function add book to user's book list.
 
         Args:
-            book(:obj:Book): information about book that user take.
+            book(:obj:Book): information about a book that user take.
         """
         self.__book_list.append(book)
 
