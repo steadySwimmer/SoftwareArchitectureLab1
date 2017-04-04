@@ -83,4 +83,7 @@ class Book():
 
     @owner.setter
     def owner(self, owner):
-        self.__owner = owner
+        """ Setter checks if new value is the object of type User
+        """
+        if isinstance(User, owner):
+            self.__owner = owner
