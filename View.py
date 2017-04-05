@@ -8,6 +8,10 @@ class View:
 	"""
 
 	@staticmethod
+	def separator_line():
+		print ("\n|-----------------------------------------------|\n")
+
+	@staticmethod
 	def main_menu():
 		View.separator_line()
 		print ("Enter a number to choose the option\n\
@@ -51,10 +55,11 @@ class View:
 
 	@staticmethod
 	def print_users(user_list):
-		View.separator_line()
+		separator_line()
 		for user in user_list:
-			print " ,".join(map(lambda user: user + ': ' + str(user_list['age'])))
-		View.separator_line()
+			print ( ", ".join(map(lambda user: user + ': ' + str(user_list['age']))) )
+
+		separator_line()
 		pass
 
 	@staticmethod
@@ -63,8 +68,6 @@ class View:
 
 	@staticmethod
 	def print_one_user(user):
-		for x in user:
-
 		pass
 
 	@staticmethod
@@ -74,6 +77,3 @@ class View:
 	@staticmethod
 	def print_user_books(user):
 		pass
-
-	def separator_line():
-		print ("\n|-----------------------------------------------|\n")
