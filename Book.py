@@ -2,7 +2,7 @@ import functools
 import User
 
 
-class Book():
+class Book:
     """ The class represents the enity of a real world book. """
 
     def __init__(self, book_name, book_author, book_year=None):
