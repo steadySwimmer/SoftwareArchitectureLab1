@@ -1,5 +1,5 @@
-import functools
 import User
+from functools import reduce
 
 
 class Book:
