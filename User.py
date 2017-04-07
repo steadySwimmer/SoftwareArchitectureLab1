@@ -17,6 +17,7 @@ class User:
         self.user_name = user_name
         self.age = age
         self.__book_list = []
+        super().__init__()
 
     @property
     def user_name(self):

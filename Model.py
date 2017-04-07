@@ -23,6 +23,7 @@ class Model:
         self.__users_list = []
         self.__books_list = []
         self.load(filename)
+        super().__init__()
 
 
     def create_user(self, username, age):
