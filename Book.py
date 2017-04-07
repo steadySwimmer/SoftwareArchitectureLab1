@@ -87,3 +87,8 @@ class Book:
         """
         if isinstance(User, owner):
             self.__owner = owner
+
+    def __str__(self):
+        if self.book_year:
+            return "''{}'' author:{} year:{} ".format(self.book_name, \
+                                               self.book_author, self.book_year)
