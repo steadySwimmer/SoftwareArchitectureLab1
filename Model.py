@@ -125,16 +125,13 @@ class Model:
         Args:
             filename(str): Set name of the file which is used to upload
                 information about library.
-        Raises:
-            OSError: if not found file or have problems with reading it.
         """
         try:
             with open(filename, 'rb') as source:
                 self.__users_list, self.__books_list = pickle.load(source)
-        except OSError as err:
+        except OSError:
             self.__users_list = []
             self.__books_list = []
-            raise Exception("[ERROR]::" + str(err))
 
 
     def save(self, filename):
