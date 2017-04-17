@@ -92,8 +92,8 @@ class Model:
 
         Examples:
             >>> model.add_book("Dialogs", "Seneka")
-            >>> mode._show_list(model.book_list)
             >>> model.add_book("Witchcraft: Special edition", "Angry Witcher")
+            >>> model._show_list(model.book_list)
             ["'Dialogs', author:Seneka;", "'Witchcraft: Special edition', author:Angry Witcher;"]
         """
         self.__books_list.append(Book(title, author, year))
@@ -113,7 +113,7 @@ class Model:
             Exception: [ERROR]::There is no book with shuch title.
             >>> model.remove_book("Dialogs")
             >>> model._show_list(model.book_list)
-            []
+            ["'Witchcraft: Special edition', author:Angry Witcher;"]
         """
         if not self._is_book_title_exists(title):
             raise Exception("[ERROR]::There is no book with shuch title.")
@@ -132,13 +132,13 @@ class Model:
 
         Examples:
             >>> model.take_book("Loki", "Witchcraft: Special edition")
-            Traceback (most recent last call):
+            Traceback (most recent call last):
             Exception: [ERROR]::There is no such user or book.
             >>> model.create_user("Loki", 29)
             >>> model.take_book("Loki", "Witchcraft: Special edition")
-            >>> model.book_list[0].owner
-            'Loki'
-            >>> model.user_list[0]._show_book_list()
+            >>> print(model.book_list[0].owner)
+            Loki, age: 29
+            >>> model.user_list[1]._show_book_list()
             ["'Witchcraft: Special edition', author:Angry Witcher;"]
         """
         if not (self._is_book_title_exists(book_title) \
@@ -147,9 +147,9 @@ class Model:
 
         book_index = self.__books_list.index([item for item in self.__books_list \
                                              if item.book_name == book_title][0])
-        self.__books_list[book_index].owner = username
         user_index = self.__users_list.index([item for item in self.__users_list \
                                              if item.user_name == username][0])
+        self.__books_list[book_index].owner = self.__users_list[user_index]
         self.__users_list[user_index].take_book(self.__books_list[book_index])
 
 
@@ -162,6 +162,18 @@ class Model:
         Raises:
             Exception: if user with given username does not exist
                         or book with given title does not exist.
+        Examples:
+            >>> model.create_user("Thor", 29)
+            >>> model.return_book("Thor", "Thunderstorm")
+            Traceback (most recent call last):
+            Exception: [ERROR]::There is no such user or book.
+            >>> model.add_book("Thunderstorm", "Titan")
+            >>> model.take_book("Thor", "Thunderstorm")
+            >>> model.return_book("Thor", "Thunderstorm")
+            >>> print(model.book_list[0].owner)
+            None
+            >>> model.user_list[0]._show_book_list()
+            []
         """
         if not (self._is_book_title_exists(book_title) \
         and self._is_username_exists(username)):
