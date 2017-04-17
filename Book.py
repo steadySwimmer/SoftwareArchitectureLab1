@@ -1,5 +1,5 @@
 import functools
-import User
+from User import *
 
 
 class Book:
@@ -22,6 +22,12 @@ class Book:
         self.rate = None
         self.owner = None
         self.__rates = []
+
+    def __str__(self):
+        if hasattr(self, 'owner'):
+            return "Book name: " + self.book_name + "; Author: " + self.book_author + ";\nBook owner: (" + str(self.owner) + ")"
+        else:
+            return "Book name: " + self.book_name + "; Author: " + self.book_author
 
     @property
     def book_name(self):
@@ -85,5 +91,5 @@ class Book:
     def owner(self, owner):
         """ Setter checks if new value is the object of type User
         """
-        if isinstance(User, owner):
+        if isinstance(owner, User):
             self.__owner = owner

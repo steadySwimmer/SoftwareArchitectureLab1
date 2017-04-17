@@ -18,6 +18,9 @@ class User:
         self.age = age
         self.__book_list = []
 
+    def __str__(self):
+        return "User name: " + self.user_name + "; Age: " + str(self.age)
+
     @property
     def user_name(self):
         """ str: contains a name of a particular user """
