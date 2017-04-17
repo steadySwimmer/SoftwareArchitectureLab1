@@ -1,8 +1,5 @@
 """ Implementation of User class """
 
-import doctest
-from Book import Book
-
 class User:
     """ Describes all properties of library user.
 
@@ -113,5 +110,7 @@ class User:
 
 # I wrote this code for test
 if __name__ == "__main__":
+    import doctest
+    from Book import Book
     doctest.testmod(extraglobs={"loki": User("Loki", 29), \
                     "spell_book": Book("Tips and Tricks", "The Witcher")})
