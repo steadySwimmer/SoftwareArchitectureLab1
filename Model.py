@@ -26,6 +26,18 @@ class Model:
         super().__init__()
 
 
+    @property
+    def user_list(self):
+        """ list: Contains the list of library users. """
+        return self.__users_list
+
+
+    @property
+    def book_list(self):
+        """ list: Contains the list of books in a library. """
+        return self.__books_list
+
+
     def create_user(self, username, age):
         """ Method  create user and add to user list.
 
