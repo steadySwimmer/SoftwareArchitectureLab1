@@ -1,6 +1,7 @@
 """ Implementation of Model class """
 
 import pickle
+import doctest
 from User import User
 from Book import Book
 
@@ -44,6 +45,16 @@ class Model:
         Args:
             username(str): Library user's name.
             age(int): User's age.
+        Raises:
+            Exception: if user with given username already exist.
+
+        Examples:
+            >>> model.create_user("Thor", 29)
+            >>> model._show_list(model.user_list)
+            ['Thor, age: 29']
+            >>> model.create_user("Thor", 1000)
+            Traceback (most recent call last):
+            Exception: [ERROR]::The user already exists.
         """
         if self._is_username_exists(username):
             raise Exception("[ERROR]::The user already exists.")
@@ -57,6 +68,14 @@ class Model:
             username(str): The name of the deleted user.
         Raises:
             Exception: if user with given username does not exist.
+
+        Examples:
+            >>> model.remove_user("Odin")
+            Traceback (most recent call last):
+            Exception: [ERROR]::There is no user with such name.
+            >>> model.remove_user("Thor")
+            >>> model._show_list(model.user_list)
+            []
         """
         if not self._is_username_exists(username):
             raise Exception("[ERROR]::There is no user with such name.")
@@ -70,6 +89,12 @@ class Model:
             title(str): Book's title.
             author(str): Book's author.
             year(int, optional): The year when book was published
+
+        Examples:
+            >>> model.add_book("Dialogs", "Seneka")
+            >>> mode._show_list(model.book_list)
+            >>> model.add_book("Witchcraft: Special edition", "Angry Witcher")
+            ["'Dialogs', author:Seneka;", "'Witchcraft: Special edition', author:Angry Witcher;"]
         """
         self.__books_list.append(Book(title, author, year))
 
@@ -81,6 +106,14 @@ class Model:
             title(str): Book's title.
         Raises:
             Exception: if book with given title does not exist.
+
+        Examples:
+            >>> model.remove_book("Quantum mechanics: Second Edition")
+            Traceback (most recent call last):
+            Exception: [ERROR]::There is no book with shuch title.
+            >>> model.remove_book("Dialogs")
+            >>> model._show_list(model.book_list)
+            []
         """
         if not self._is_book_title_exists(title):
             raise Exception("[ERROR]::There is no book with shuch title.")
@@ -96,6 +129,17 @@ class Model:
         Raises:
             Exception: if user with given username does not exist
                         or book with given title does not exist.
+
+        Examples:
+            >>> model.take_book("Loki", "Witchcraft: Special edition")
+            Traceback (most recent last call):
+            Exception: [ERROR]::There is no such user or book.
+            >>> model.create_user("Loki", 29)
+            >>> model.take_book("Loki", "Witchcraft: Special edition")
+            >>> model.book_list[0].owner
+            'Loki'
+            >>> model.user_list[0]._show_book_list()
+            ["'Witchcraft: Special edition', author:Angry Witcher;"]
         """
         if not (self._is_book_title_exists(book_title) \
         and self._is_username_exists(username)):
@@ -160,6 +204,15 @@ class Model:
         user_name = [user for user in self.__users_list if user.user_name == username]
         return True if user_name else False
 
+
     def _is_book_title_exists(self, book_title):
         title = [book for book in self.__books_list if book.book_name == book_title]
         return True if title else False
+
+    # this method created for test
+    def _show_list(self, lst):
+        return [str(item) for item in lst]
+
+
+if __name__ == "__main__":
+    doctest.testmod(extraglobs={"model": Model("db.txt")})
