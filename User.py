@@ -1,5 +1,8 @@
 """ Implementation of User class """
 
+import doctest
+from Book import Book
+
 class User:
     """ Describes all properties of library user.
 
@@ -55,6 +58,13 @@ class User:
         """
         return self.__age
 
+
+    @property
+    def book_list(self):
+        """ list: Contains user's books. """
+        return self.__book_list
+
+
     @age.setter
     def age(self, age):
         if age > 0 and age < 100:
@@ -97,13 +107,11 @@ class User:
 
     # this method created for test
     def _show_book_list(self):
-        return [str(book) for book in self.__book_list]
+        return [str(book) for book in self.book_list]
 
 
 
 # I wrote this code for test
 if __name__ == "__main__":
-    import doctest
-    from Book import Book
     doctest.testmod(extraglobs={"loki": User("Loki", 29), \
                     "spell_book": Book("Tips and Tricks", "The Witcher")})
