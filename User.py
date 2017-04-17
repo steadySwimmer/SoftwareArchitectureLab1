@@ -13,6 +13,13 @@ class User:
         Args:
             user_name(str): User name; can be an arbitrary sequence of characters.
             age(int): User's age; must be in (0..100).
+
+        Examples:
+            >>> new_user = User('Thor', 29)
+            >>> new_user  #doctest: +ELLIPSIS
+            <__main__.User object at 0x...>
+            >>> print(new_user)
+            Thor, age: 29
         """
         self.user_name = user_name
         self.age = age
@@ -21,12 +28,31 @@ class User:
 
     @property
     def user_name(self):
-        """ str: Contains a name of a particular user """
+        """ str: Contains a name of a particular user
+
+        Examples:
+            >>> loki.user_name
+            'Loki'
+            >>> loki.user_name = "Loki The King of Asgard"
+            >>> loki.user_name
+            'Loki The King of Asgard'
+        """
         return self.__user_name
 
     @property
     def age(self):
-        """ int: Contains an age of  a particular user, must be in range(1, 100) """
+        """ int: Contains an age of  a particular user, must be in range(1, 100)
+
+        Examples:
+            >>> loki.age
+            29
+            >>> loki.age = 28
+            >>> loki.age
+            28
+            >>> loki.age = -59
+            Traceback (most recent call last):
+            Exception: Age must be value between 1 and 99
+        """
         return self.__age
 
     @age.setter
@@ -45,6 +71,11 @@ class User:
 
         Args:
             book(:obj:Book): Information about a book that user take.
+
+        Examples:
+            >>> loki.take_book(spell_book)
+            >>> loki._show_book_list()
+            ["'Tips and Tricks', author:The Witcher;"]
         """
         self.__book_list.append(book)
 
@@ -53,10 +84,26 @@ class User:
 
         Args:
             title(str): Book's title.
+
+        Exapmples:
+            >>> loki.return_book("Tips and Tricks")
+            >>> loki._show_book_list()
+            []
         """
         self.__book_list = [book for book in self.__book_list if book.book_name != title]
 
     def __str__(self):
         return "{}, age: {}".format(self.user_name, self.age)
 
+    # this method created for test
+    def _show_book_list(self):
+        return [str(book) for book in self.__book_list]
 
+
+
+# I wrote this code for test
+if __name__ == "__main__":
+    import doctest
+    from Book import Book
+    doctest.testmod(extraglobs={"loki": User("Loki", 29), \
+                    "spell_book": Book("Tips and Tricks", "The Witcher")})
