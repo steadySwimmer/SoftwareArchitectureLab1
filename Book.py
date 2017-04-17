@@ -1,6 +1,6 @@
 from functools import reduce
 from User import *
-
+import doctest
 
 class Book:
     """ The class represents the enity of a real world book. """
@@ -15,6 +15,10 @@ class Book:
             Private attribute:
                 rates:(list): The list which store all rates
                 that were ever setted. Stored to compute the book's rate.
+
+            Examples:
+                >>> b = Book("Strange creatures", "Jim Salamander")
+                >>> b = Book("Strange creatures", "Jim Salamander", book_year=1996)
         """
         self.book_name = book_name
         self.book_author = book_author
@@ -27,6 +31,13 @@ class Book:
     def book_name(self):
         """str: Property that stores the book name
             of the current book.
+
+        Examples:
+            >>> book.book_name
+            'Thunderstorm'
+            >>> book.book_name = "Thunderstorm: The Hammer magic"
+            >>> book.book_name
+            'Thunderstorm: The Hammer magic'
         """
         return self.__book_name
 
@@ -36,7 +47,15 @@ class Book:
 
     @property
     def book_author(self):
-        """str: Property that stores the book author"""
+        """str: Property that stores the book author
+
+        Examples:
+            >>> book.book_author
+            'Titan'
+            >>> book.book_author = "The Acient"
+            >>> book.book_author
+            'The Acient'
+        """
         return self.__book_author
 
     @book_author.setter
@@ -45,7 +64,14 @@ class Book:
 
     @property
     def book_year(self):
-        """int: Property that stores the year when the book was published. """
+        """int: Property that stores the year when the book was published.
+
+        Examples:
+            >>> book.book_year
+            >>> book.book_year = 1200
+            >>> book.book_year
+            1200
+        """
         return self.__book_year
 
     @book_year.setter
@@ -78,6 +104,12 @@ class Book:
     def owner(self):
         """User: The attribute of type User, that is storing
                 the user, who took the book.
+
+        Examples:
+            >>> book.owner
+            >>> book.owner = user
+            >>> print(book.owner)
+            Thor, age: 29
         """
         return self.__owner
 
@@ -85,7 +117,7 @@ class Book:
     def owner(self, owner):
         """ Setter checks if new value is the object of type User
         """
-        if isinstance(owner, User):
+        if isinstance(owner, User) or owner is None:
             self.__owner = owner
 
     def __str__(self):
@@ -95,3 +127,8 @@ class Book:
         else:
             return "'{}', author:{};".format(self.book_name, \
                                                self.book_author)
+
+
+if __name__ == "__main__":
+    doctest.testmod(extraglobs={"book": Book("Thunderstorm", "Titan"), \
+                                "user": User("Thor", 29)})
