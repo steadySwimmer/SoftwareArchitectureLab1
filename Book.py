@@ -93,5 +93,5 @@ class Book:
             return "'{}'; author:{}; year:{} ".format(self.book_name, \
                                                self.book_author, self.book_year)
         else:
-            return "'{}'; author:{}; year:{} ".format(self.book_name, \
+            return "'{}'; author:{};".format(self.book_name, \
                                                self.book_author)
