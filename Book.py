@@ -90,8 +90,8 @@ class Book:
 
     def __str__(self):
         if self.book_year:
-            return "'{}'; author:{}; year:{} ".format(self.book_name, \
+            return "'{}', author:{}; year:{} ".format(self.book_name, \
                                                self.book_author, self.book_year)
         else:
-            return "'{}'; author:{};".format(self.book_name, \
+            return "'{}', author:{};".format(self.book_name, \
                                                self.book_author)
