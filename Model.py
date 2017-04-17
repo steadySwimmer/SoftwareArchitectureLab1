@@ -89,13 +89,20 @@ class Model:
             title(str): Book's title.
             author(str): Book's author.
             year(int, optional): The year when book was published
+        Raises:
+            Exception: if book with given title already exists.
 
         Examples:
             >>> model.add_book("Dialogs", "Seneka")
+            >>> model.add_book("Dialogs", "Seneka")
+            Traceback (most recent call last):
+            Exception: [ERROR]::The book already exists.
             >>> model.add_book("Witchcraft: Special edition", "Angry Witcher")
             >>> model._show_list(model.book_list)
             ["'Dialogs', author:Seneka;", "'Witchcraft: Special edition', author:Angry Witcher;"]
         """
+        if self._is_book_title_exists(title):
+            raise Exception("[ERROR]::The book already exists.")
         self.__books_list.append(Book(title, author, year))
 
 
@@ -186,6 +193,21 @@ class Model:
                                              if item.user_name == username][0])
         self.__users_list[user_index].return_book(book_title)
 
+
+    def feedback(self, book_title, rate):
+        """ Sets rate for the particular book.
+
+        Args:
+            book_title(str): Book's title.
+            rate(int) = Book rating points.
+        Raises:
+            Exception: if book with given title does not exist.
+        """
+        if not self._is_book_title_exists(book_title):
+            raise Exception("[ERROR]::There is no book with given title.")
+        index = self.__books_list.index([item for item in self.__books_list \
+                                             if item.book_name == book_title][0])
+        self.__books_list[index].rate = rate
 
     def load(self, filename):
         """ Load information about library users and books
