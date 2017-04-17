@@ -1,5 +1,5 @@
-import User
 from functools import reduce
+from User import *
 
 
 class Book:
@@ -85,10 +85,13 @@ class Book:
     def owner(self, owner):
         """ Setter checks if new value is the object of type User
         """
-        if isinstance(User, owner):
+        if isinstance(owner, User):
             self.__owner = owner
 
     def __str__(self):
         if self.book_year:
-            return "''{}'' author:{} year:{} ".format(self.book_name, \
+            return "'{}'; author:{}; year:{} ".format(self.book_name, \
                                                self.book_author, self.book_year)
+        else:
+            return "'{}'; author:{}; year:{} ".format(self.book_name, \
+                                               self.book_author)

@@ -14,14 +14,13 @@ class View:
 	@staticmethod
 	def main_menu():
 		View.separator_line()
-		print ("Enter a number to choose the option\n\
-				1. Choose user.\n\
+		print ("Enter a number to choose the option\n1. Choose user.\n\
 				2. Create user.\n\
 				3. List of user.\n\
 				4. Remove user.\n\
 				5. Choose book.\n\
 				6. Create book\n\
-				7. List of books\n\
+				7. List of booksn\n\
 				8. Remove book\n\
 				9. Exit.\n")
 		View.separator_line()
@@ -55,11 +54,11 @@ class View:
 
 	@staticmethod
 	def print_users(user_list):
-		separator_line()
+		View.separator_line()
 		for user in user_list:
 			print ( ", ".join(map(lambda user: user + ': ' + str(user_list['age']))) )
 
-		separator_line()
+		View.separator_line()
 		pass
 
 	@staticmethod
