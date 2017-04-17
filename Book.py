@@ -23,7 +23,7 @@ class Book:
         self.book_name = book_name
         self.book_author = book_author
         self.book_year = book_year
-        self.rate = None
+        self.rate = 0
         self.owner = None
         self.__rates = []
 
@@ -79,24 +79,24 @@ class Book:
         self.__book_year = book_year
 
     @property
-    def book_rate(self):
+    def rate(self):
         """float: The average rate of the book.
             Computing due to all rates that were ever setted
             to the current book.
         """
-        return self.__book_rate
+        return self.__rate
 
-    @book_rate.setter
-    def book_rate(self, book_rate):
+    @rate.setter
+    def rate(self, book_rate):
         """ float: The book rate setter is computing the rate
             of book taking the sum of list with already
             setted rates and divides it on the current
             length of rates stored in rates list and plus
             one due to one added in this setter.
         """
-        if (book_rate >= 0.0 and book_rate <= 5.0):
-            self.__book_rate = (reduce(lambda x, y: x + y, self.__rates) + book_rate) / (len(self.__rates) + 1)
-            self.__book_rate.append(book_rate)
+        if (book_rate >= 1.0 and book_rate <= 5.0):
+            self.__rate = (reduce(lambda x, y: x + y, self.__rates) + book_rate) / (len(self.__rates) + 1)
+            self.__rates.append(book_rate)
         else:
             raise Exception('Rate value must be between 0.0 and 5.0')
 
