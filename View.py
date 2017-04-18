@@ -56,15 +56,19 @@ class View:
 	@staticmethod
 	def print_users(user_list):
 		View.separator_line()
-		for user in user_list:
-			print ( ", ".join(map(lambda user: user + ': ' + str(user_list['age']))) )
-
+		for i in range(len(user_list)):
+			user = user_list[i]
+			print ("{}. {}".format(i + 1, user))
 		View.separator_line()
 		pass
 
 	@staticmethod
 	def print_books(book_list):
-		pass
+		View.separator_line()
+		for i in range(0, len(book_list)):
+			book = book_list[i]
+			print ("{}. {}".format(i + 1, book))
+		View.separator_line()
 
 	@staticmethod
 	def print_one_user(user):
@@ -77,6 +81,14 @@ class View:
 	@staticmethod
 	def print_user_books(user):
 		pass
+
+	@staticmethod
+	def success_user_create_message():
+		print ("The user created successfully")
+
+	@staticmethod
+	def wrong_input():
+		print ("The input is invalid")
 
 	@staticmethod
 	def wrong_option():

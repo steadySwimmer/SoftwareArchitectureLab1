@@ -23,7 +23,6 @@ class Book:
         self.book_name = book_name
         self.book_author = book_author
         self.book_year = book_year
-        self.rate = 0
         self.owner = None
         self.__rates = []
 
@@ -94,7 +93,7 @@ class Book:
             length of rates stored in rates list and plus
             one due to one added in this setter.
         """
-        if (book_rate >= 1.0 and book_rate <= 5.0):
+        if (book_rate >= 0.0 and book_rate <= 5.0):
             self.__rate = (reduce(lambda x, y: x + y, self.__rates) + book_rate) / (len(self.__rates) + 1)
             self.__rates.append(book_rate)
         else:
@@ -127,6 +126,14 @@ class Book:
         else:
             return "'{}', author:{};".format(self.book_name, \
                                                self.book_author)
+
+    def __repr__(self):
+        if self.book_year:
+            return "'{}', author:{}; year:{} ".format(self.book_name, \
+                                               self.book_author, self.book_year)
+        else:
+            return "'{}', author:{};".format(self.book_name, \
+                                               self.book_author)        
 
 
 if __name__ == "__main__":

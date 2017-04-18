@@ -5,8 +5,8 @@ model = Model('storage')
 
 model.load()
 
-model.add_book('Harry', 'Kate', 1956)
+controller = Controller(model)
 
-print (model._users_list)
+controller.start()
 
 model.save()
