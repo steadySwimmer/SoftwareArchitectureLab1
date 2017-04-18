@@ -23,7 +23,8 @@ class Model:
         """
         self.__users_list = []
         self.__books_list = []
-        self.load(filename)
+        self.filename = filename
+        self.load()
         super().__init__()
 
 
@@ -209,7 +210,7 @@ class Model:
                                              if item.book_name == book_title][0])
         self.__books_list[index].rate = rate
 
-    def load(self, filename):
+    def load(self):
         """ Load information about library users and books
 
         Args:
@@ -217,21 +218,21 @@ class Model:
                 information about library.
         """
         try:
-            with open(filename, 'rb') as source:
+            with open(self.filename, 'rb') as source:
                 self.__users_list, self.__books_list = pickle.load(source)
         except OSError:
             self.__users_list = []
             self.__books_list = []
 
 
-    def save(self, filename):
+    def save(self):
         """ Save information about library in text file.
 
         Args:
             filename(str): Set name of the file which is used to upload
                 information about library.
         """
-        with open(filename, 'wb') as target_file:
+        with open(self.filename, 'wb') as target_file:
             pickle.dump([self.__users_list, self.__books_list], target_file)
 
     def _is_username_exists(self, username):
