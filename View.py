@@ -60,7 +60,22 @@ class View:
 			user = user_list[i]
 			print ("{}. {}".format(i + 1, user))
 		View.separator_line()
-		pass
+
+	@staticmethod
+	def detailed_print_users(user_list):
+		View.separator_line()
+		for i in range(len(user_list)):
+			user = user_list[i]
+			if user.book_list:
+				print ("{}. {}\n{}".format(i + 1, user, user.book_list))
+			else:
+				print ("{}. {}".format(i + 1, user))
+
+	@staticmethod
+	def take_return_book():
+		View.separator_line()
+		print ("1. Take book.")
+		print ("2. Return book.")
 
 	@staticmethod
 	def print_books(book_list):
