@@ -1,14 +1,12 @@
-from Book import *
-from User import *
+from Controller import Controller
+from Model import Model
 
-u = User('Tim', 43)
+model = Model('storage')
 
-b = Book('TAe', 'ere', 12)
+model.load()
 
-print (b)
+model.add_book('Harry', 'Kate', 1956)
 
-b.owner = u
-print (b.owner)
+print (model._users_list)
 
-print (b)
-
+model.save()

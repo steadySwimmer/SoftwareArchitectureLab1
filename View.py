@@ -14,15 +14,16 @@ class View:
 	@staticmethod
 	def main_menu():
 		View.separator_line()
-		print ("Enter a number to choose the option\n1. Choose user.\n\
-				2. Create user.\n\
-				3. List of user.\n\
-				4. Remove user.\n\
-				5. Choose book.\n\
-				6. Create book\n\
-				7. List of booksn\n\
-				8. Remove book\n\
-				9. Exit.\n")
+		print ("Enter a number to choose the option")
+		print ("1. Choose user.")
+		print ("2. Create user.")
+		print ("3. List of user.")
+		print ("4. Remove user.")
+		print ("5. Choose book.")
+		print ("6. Create book.") 
+		print ("7. List of books.")
+		print ("8. Remove book.")
+		print ("9. Exit.")
 		View.separator_line()
 		pass
 
@@ -76,3 +77,11 @@ class View:
 	@staticmethod
 	def print_user_books(user):
 		pass
+
+	@staticmethod
+	def wrong_option():
+		print ("No current option.")
+
+	@staticmethod
+	def exit_message():
+		print ("Bye, bye))")
