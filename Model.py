@@ -125,6 +125,12 @@ class Model:
         """
         if not self._is_book_title_exists(title):
             raise Exception("[ERROR]::There is no book with shuch title.")
+        
+        for user in self.__users_list:
+            for b in user.book_list:
+                if (b.book_name == title):
+                    self.return_book(user.user_name, title)
+
         self.__books_list = [book for book in self.__books_list if book.book_name != title]
 
 

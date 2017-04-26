@@ -86,6 +86,16 @@ class View:
 		View.separator_line()
 
 	@staticmethod
+	def detailed_print_books(book_list):
+		View.separator_line()
+		for i in range(len(book_list)):
+			book = book_list[i]
+			if (hasattr(book, "owner") and book.owner is not None):
+				print ("{}. {}\nOwner: {}".format(i + 1, book, book.owner))
+			else:
+				print ("{}. {}".format(i + 1, book))
+
+	@staticmethod
 	def print_one_user(user):
 		pass
 
@@ -100,6 +110,10 @@ class View:
 	@staticmethod
 	def success_user_create_message():
 		print ("The user created successfully")
+
+	@staticmethod
+	def success_book_create_message():
+		print ("The book creted successfully")
 
 	@staticmethod
 	def wrong_input():
