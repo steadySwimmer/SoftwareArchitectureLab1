@@ -14,7 +14,7 @@ class Model:
         __books_list(list): List of books available in the library.
     """
 
-    def __init__(self, filename):
+    def __init__(self, filename, serialization_type):
         """ Initialize Model class
 
         Args:
@@ -24,6 +24,7 @@ class Model:
         self.__users_list = []
         self.__books_list = []
         self.filename = filename
+        self.serialization_type = serialization_type
         self.load()
         super().__init__()
 
@@ -223,13 +224,17 @@ class Model:
             filename(str): Set name of the file which is used to upload
                 information about library.
         """
-        try:
-            with open(self.filename, 'rb') as source:
-                self.__users_list, self.__books_list = pickle.load(source)
-        except OSError:
-            self.__users_list = []
-            self.__books_list = []
-
+        if (self.serialization_type == "pickle"):
+            try:
+                with open(self.filename, 'rb') as source:
+                    self.__users_list, self.__books_list = pickle.load(source)
+            except OSError:
+                self.__users_list = []
+                self.__books_list = []
+        elif (self.serialization_type == "yaml"):
+            pass
+        elif (self.serialization_type == "json"):
+            pass
 
     def save(self):
         """ Save information about library in text file.
@@ -238,8 +243,13 @@ class Model:
             filename(str): Set name of the file which is used to upload
                 information about library.
         """
-        with open(self.filename, 'wb') as target_file:
-            pickle.dump([self.__users_list, self.__books_list], target_file)
+        if (self.serialization_type == "pickle"):
+            with open(self.filename, 'wb') as target_file:
+                pickle.dump([self.__users_list, self.__books_list], target_file)
+        elif (self.serialization_type == "yaml"):
+            pass
+        elif (self.serialization_type == "json"):
+            pass
 
     def _is_username_exists(self, username):
         user_name = [user for user in self.__users_list if user.user_name == username]
