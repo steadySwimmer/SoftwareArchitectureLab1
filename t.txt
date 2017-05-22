@@ -1,0 +1,4 @@
+!!python/object:User.User
+_User__age: 11
+_User__book_list: []
+_User__user_name: '1'

@@ -5,7 +5,7 @@ import doctest
 class Book:
     """ The class represents the enity of a real world book. """
 
-    def __init__(self, book_name, book_author, book_year=None):
+    def __init__(self, book_name, book_author, book_year=None, rates=[]):
         """ Initializer of Book class
             Args:
                 book_name:(str): The name of the book
@@ -24,7 +24,7 @@ class Book:
         self.book_author = book_author
         self.book_year = book_year
         self.owner = None
-        self.__rates = []
+        self.__rates = rates
 
     @property
     def book_name(self):
@@ -115,6 +115,9 @@ class Book:
         """
         return self.__owner
 
+    def _rates(self):
+        return self.__rates
+
     @owner.setter
     def owner(self, owner):
         """ Setter checks if new value is the object of type User
@@ -136,7 +139,7 @@ class Book:
                                                self.book_author, self.book_year)
         else:
             return "'{}', author:{};".format(self.book_name, \
-                                               self.book_author)        
+                                               self.book_author)
 
 
 if __name__ == "__main__":
