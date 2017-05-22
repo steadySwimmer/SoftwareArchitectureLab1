@@ -25,19 +25,16 @@ class View:
 		print ("8. Remove book.")
 		print ("9. Exit.")
 		View.separator_line()
-		pass
 
 	@staticmethod
 	def user_create():
 		View.separator_line()
 		print ("Enter the information about new user\n.")
-		pass
 
 	@staticmethod
 	def book_create():
 		View.separator_line()
 		print ("Enter the information about new book\n.")
-		pass
 
 	@staticmethod
 	def take_book():
@@ -45,13 +42,11 @@ class View:
 		print ("Take a book from the list. The library has only one copy of book.\n\
 				So book can be taken only once or you should wait when someone will\n\
 				return it.")
-		pass
 
 	@staticmethod
 	def return_book():
 		View.separator_line()
 		print ("Choose a book from your list, which you wanna return.")
-		pass
 
 	@staticmethod
 	def print_users(user_list):

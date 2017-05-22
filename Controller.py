@@ -116,22 +116,27 @@ class Controller:
 		''' Take book procces. Takes book from model
 		book list and give to user.'''
 		number = self.take_return_book_helper(self.model.book_list)
-		chosen_book = self.model.book_list[number]
-		self.model.take_book(chosen_user.user_name, chosen_book.book_name)
-		return
+		try:
+			chosen_book = self.model.book_list[number]
+			self.model.take_book(chosen_user.user_name, chosen_book.book_name)
+		except TypeError:
+			View.wrong_input()
 
 	def return_book_manager(self, chosen_user):
 		'''Return book process. Returns book to library
 		deletes if from user book list.'''
 		number = self.take_return_book_helper(chosen_user.book_list)
-		chosen_book = chosen_user.book_list[number]
-		self.model.return_book(chosen_user.user_name, chosen_book.book_name)
+		try:
+			chosen_book = chosen_user.book_list[number]
+			self.model.return_book(chosen_user.user_name, chosen_book.book_name)
+		except TypeError:
+			View.wrong_input()
 
 	def take_return_book_helper(self, book_list):
 		'''Helper methods for take and return manage.
 		Made because of similiar organization.'''
 		View.print_books(book_list)
-		book_number = 0
+		book_number = -1
 		try:
 			book_number = int(input("Enter book number: "))
 		except ValueError:
@@ -182,6 +187,7 @@ class Controller:
 		print ("New book rate {} for Book {}".format(book.rate, book))
 
 	def create_book_manager(self):
+		'''Method is responsbile for creating a book'''
 		book_name = ""
 		book_year = 0
 		book_author = ""
@@ -198,6 +204,9 @@ class Controller:
 			View.success_book_create_message()
 
 	def remove_book_manager(self):
+		'''Method is responsbile for removing a book.
+		It removes book from library and from all owner's
+		list of books.'''
 		book_number = 0
 		try:
 			book_number = int(input("Enter book number: "))

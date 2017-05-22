@@ -256,4 +256,4 @@ class Model:
 
 
 if __name__ == "__main__":
-    doctest.testmod(extraglobs={"model": Model("db.txt")})
+    doctest.testmod(extraglobs={"model": Model("storage")})
