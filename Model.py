@@ -2,6 +2,7 @@
 
 import pickle
 import doctest
+import Serialize as srz
 from User import User
 from Book import Book
 
@@ -224,17 +225,14 @@ class Model:
             filename(str): Set name of the file which is used to upload
                 information about library.
         """
-        if (self.serialization_type == "pickle"):
-            try:
-                with open(self.filename, 'rb') as source:
-                    self.__users_list, self.__books_list = pickle.load(source)
-            except OSError:
-                self.__users_list = []
-                self.__books_list = []
-        elif (self.serialization_type == "yaml"):
-            pass
-        elif (self.serialization_type == "json"):
-            pass
+        specifier = "rb" if self.serialization_type == "pickle" else "r"
+        try:
+            with open(self.filename, specifier) as source:
+                self.__users_list, self.__books_list = srz.load(source, self.serialization_type)
+        except OSError:
+            self.__users_list = []
+            self.__books_list = []
+
 
     def save(self):
         """ Save information about library in text file.
@@ -243,13 +241,10 @@ class Model:
             filename(str): Set name of the file which is used to upload
                 information about library.
         """
-        if (self.serialization_type == "pickle"):
-            with open(self.filename, 'wb') as target_file:
-                pickle.dump([self.__users_list, self.__books_list], target_file)
-        elif (self.serialization_type == "yaml"):
-            pass
-        elif (self.serialization_type == "json"):
-            pass
+        specifier = "wb" if self.serialization_type == "pickle" else "w"
+        with open(self.filename, specifier) as target_file:
+            srz.save([self.__users_list, self.__books_list], target_file, self.serialization_type)
+
 
     def _is_username_exists(self, username):
         user_name = [user for user in self.__users_list if user.user_name == username]
@@ -266,4 +261,4 @@ class Model:
 
 
 if __name__ == "__main__":
-    doctest.testmod(extraglobs={"model": Model("storage")})
+    doctest.testmod(extraglobs={"model": Model("storage", "pickle")})
