@@ -5,8 +5,14 @@ import yaml
 import JsonSerialize as jsn
 
 
-def load(serialize_method):
-    pass
+def load(file_obj, serialize_method):
+    """ deserialize data """
+    if serialize_method == "pickle":
+        return pickle.load(file_obj)
+    elif serialize_method == "yaml":
+        return yaml.load(file_obj)
+    elif serialize_method == "json":
+        return jsn.jload(file_obj)
 
 
 
@@ -18,7 +24,7 @@ def save(data, file_obj, serialize_method):
         elif serialize_method == "yaml":
             yaml.dump(data, file_obj, default_flow_style=False)
         elif serialize_method == "json":
-            pass
+            jsn.jdump(data, file_obj)
     except ValueError:
         raise Exception("[ERROR]::Serialization failed")
 

@@ -142,6 +142,13 @@ class Book:
                                                self.book_author)
 
 
+    def __eq__(self, book):
+        if self.book_name == book.book_name and self.book_author == book.book_author \
+        and self.book_year == book.book_year:
+            return True
+        return False
+
+
 if __name__ == "__main__":
     doctest.testmod(extraglobs={"book": Book("Thunderstorm", "Titan"), \
                                 "user": User("Thor", 29)})
