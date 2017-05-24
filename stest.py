@@ -19,32 +19,34 @@ class TestSerializeMethods(unittest.TestCase):
         book = Book('test', 'author')
         user.take_book(book)
         self.data = [[user], [book]]
+        self.output = None
 
 
     def test_pickle(self):
         """ test for serialization with pickle """
         output = pickle.dumps(self.data)
-        output = BytesIO(output)
-        extr_data = pickle.load(output)
+        self.output = BytesIO(output)
+        extr_data = pickle.load(self.output)
         self.assertEqual(self.data, extr_data)
-        output.close()
+
 
     def test_yaml(self):
         """ test for serialization with yaml """
         output = yaml.dump(self.data)
-        output = StringIO(output)
-        extr_data = yaml.load(output)
+        self.output = StringIO(output)
+        extr_data = yaml.load(self.output)
         self.assertEqual(self.data, extr_data)
-        output.close()
 
 
     def test_json(self):
         """ test for serialization with json """
         output = json.dumps(self.data, default=jns.js_default)
-        output = StringIO(output)
-        users, books = srz.load(output, 'json')
+        self.output = StringIO(output)
+        users, books = srz.load(self.output, 'json')
         self.assertEqual(self.data, [users, books])
-        output.close()
+
+    def tearDown(self):
+        self.output.close()
 
 
 if __name__ == "__main__":
