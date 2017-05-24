@@ -12,9 +12,6 @@ if __name__ == "__main__":
     ''' Model creation. '''
     model = Model('storage', result_dict[save_type_key])
 
-    ''' The load of data from local saved file. '''
-    model.load()
-
     ''' Controller creation. Use model as agruement. '''
     controller = Controller(model)
 

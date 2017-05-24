@@ -1,2 +1,2 @@
 # Serialization types: pickle, yaml, json
-save_type=pickle
+save_type=json

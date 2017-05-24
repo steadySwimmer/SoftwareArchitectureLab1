@@ -5,7 +5,7 @@ import doctest
 import Serialize as srz
 from User import User
 from Book import Book
-
+from configuration.configParser import last_session_data_save, last_session_save_type
 
 class Model:
     """ Class Model controls all operation on users and books in the library.
@@ -225,10 +225,13 @@ class Model:
             filename(str): Set name of the file which is used to upload
                 information about library.
         """
-        specifier = "rb" if self.serialization_type == "pickle" else "r"
+
+        load_type = last_session_save_type()
+
+        specifier = "rb" if load_type == "pickle" else "r"
         try:
             with open(self.filename, specifier) as source:
-                self.__users_list, self.__books_list = srz.load(source, self.serialization_type)
+                self.__users_list, self.__books_list = srz.load(source, load_type)
         except OSError:
             self.__users_list = []
             self.__books_list = []
@@ -244,6 +247,8 @@ class Model:
         specifier = "wb" if self.serialization_type == "pickle" else "w"
         with open(self.filename, specifier) as target_file:
             srz.save([self.__users_list, self.__books_list], target_file, self.serialization_type)
+
+        last_session_data_save(self.serialization_type)
 
 
     def _is_username_exists(self, username):
