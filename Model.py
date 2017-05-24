@@ -228,7 +228,7 @@ class Model:
 
         load_type = last_session_save_type()
 
-        specifier = "rb" if load_type == "pickle" else "r"
+        specifier = "rb" if load_type == srz.pickle_type else "r"
         try:
             with open(self.filename, specifier) as source:
                 self.__users_list, self.__books_list = srz.load(source, load_type)
@@ -244,7 +244,7 @@ class Model:
             filename(str): Set name of the file which is used to upload
                 information about library.
         """
-        specifier = "wb" if self.serialization_type == "pickle" else "w"
+        specifier = "wb" if self.serialization_type == srz.pickle_type else "w"
         with open(self.filename, specifier) as target_file:
             srz.save([self.__users_list, self.__books_list], target_file, self.serialization_type)
 
