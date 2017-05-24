@@ -106,7 +106,11 @@ class User:
     def _show_book_list(self):
         return [str(book) for book in self.book_list]
 
-
+    def __eq__(self, user):
+        if self.user_name == user.user_name and self.age == user.age \
+        and self.book_list == user.book_list:
+            return True
+        return False
 
 # I wrote this code for test
 if __name__ == "__main__":
